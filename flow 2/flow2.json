@@ -1,0 +1,112 @@
+[
+    {
+        "id": "c5d9b469d660f27f",
+        "type": "tab",
+        "label": "flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b15cbee83cc34b8b",
+        "type": "inject",
+        "z": "c5d9b469d660f27f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Topic del ejemplo",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "6a6fd447ca7b2766"
+            ]
+        ]
+    },
+    {
+        "id": "6a6fd447ca7b2766",
+        "type": "function",
+        "z": "c5d9b469d660f27f",
+        "name": "",
+        "func": "\n// Lo que está después de “//” son comentarios\n// Crea un objeto Date a partir del payload enviado por timestamp\nvar date = new Date(msg.payload);\n// Cambia el payload para que sea una fecha con formato\nmsg.payload = date.toString();\n// Regresa el mensaje para que se envíe al sigueinte nodo\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "0aca89fb3680bd80",
+                "d9813e30feb22eec"
+            ]
+        ]
+    },
+    {
+        "id": "0aca89fb3680bd80",
+        "type": "debug",
+        "z": "c5d9b469d660f27f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d9813e30feb22eec",
+        "type": "ui_text",
+        "z": "c5d9b469d660f27f",
+        "group": "7c0f4781d3baad79",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Hora actual",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 610,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7c0f4781d3baad79",
+        "type": "ui_group",
+        "name": "Bloque de hora",
+        "tab": "090673618269df66",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "090673618269df66",
+        "type": "ui_tab",
+        "name": "Hora Formateda",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
