@@ -1,0 +1,319 @@
+[
+    {
+        "id": "ecc49d4d30dd0749",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5da968f9656d3659",
+        "type": "mqtt in",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "topic": "codigoIoT/SIC/G5/temp",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a26d972205b5e500",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "fd708996812c0d4f"
+            ]
+        ]
+    },
+    {
+        "id": "fd708996812c0d4f",
+        "type": "json",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "4ce5b04956cbe419",
+                "b684cf5d16f9d8ae",
+                "f50d428a04657cc4",
+                "f4461611d18ddb6c"
+            ]
+        ]
+    },
+    {
+        "id": "52eea7eaf2a5ce65",
+        "type": "ui_text",
+        "z": "ecc49d4d30dd0749",
+        "group": "45f6f9b7be2dc832",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "ID",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 970,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "08d45631ec1e383a",
+        "type": "ui_gauge",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "group": "45f6f9b7be2dc832",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4ce5b04956cbe419",
+        "type": "function",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "func": "msg.payload = msg.payload.id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "52eea7eaf2a5ce65"
+            ]
+        ]
+    },
+    {
+        "id": "b684cf5d16f9d8ae",
+        "type": "function",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "func": "msg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 200,
+        "wires": [
+            [
+                "08d45631ec1e383a"
+            ]
+        ]
+    },
+    {
+        "id": "f50d428a04657cc4",
+        "type": "debug",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "434367c2d946953d",
+        "type": "ui_chart",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "group": "f727f99887befda2",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Gráfica a tráves del tiempo",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4461611d18ddb6c",
+        "type": "function",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 240,
+        "wires": [
+            [
+                "434367c2d946953d"
+            ]
+        ]
+    },
+    {
+        "id": "33e461215d01a6ae",
+        "type": "ui_switch",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "45f6f9b7be2dc832",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 530,
+        "y": 380,
+        "wires": [
+            [
+                "9d37a5c2cbd305da"
+            ]
+        ]
+    },
+    {
+        "id": "9d37a5c2cbd305da",
+        "type": "mqtt out",
+        "z": "ecc49d4d30dd0749",
+        "name": "",
+        "topic": "codigoIoT/SIC/G5/abril",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a26d972205b5e500",
+        "x": 720,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a26d972205b5e500",
+        "type": "mqtt-broker",
+        "name": "hive mq",
+        "broker": "52.29.114.186",
+        "port": "1883",
+        "clientid": "Abril-SIC",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "45f6f9b7be2dc832",
+        "type": "ui_group",
+        "name": "Group último dato",
+        "tab": "2bcbf4a5f15b3a12",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f727f99887befda2",
+        "type": "ui_group",
+        "name": "Group gráfica",
+        "tab": "2bcbf4a5f15b3a12",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2bcbf4a5f15b3a12",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
