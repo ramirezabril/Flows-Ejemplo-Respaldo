@@ -1,0 +1,256 @@
+[
+    {
+        "id": "1a14bd5e39995fad",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dfefe2e0d994c76a",
+        "type": "mqtt in",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "topic": "codigoIoT/SIC/G5/temp",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a26d972205b5e500",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "f28586a5d7c2daf7"
+            ]
+        ]
+    },
+    {
+        "id": "f28586a5d7c2daf7",
+        "type": "json",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "45161bf7ec500c65",
+                "506faf25e7221b73",
+                "864fd18c393be93e",
+                "f9f971573ff0fac1"
+            ]
+        ]
+    },
+    {
+        "id": "1896692b9761926f",
+        "type": "ui_text",
+        "z": "1a14bd5e39995fad",
+        "group": "675be2c84613b4d6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "ID",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 970,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "792f7d19b50e9197",
+        "type": "ui_gauge",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "group": "675be2c84613b4d6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-30",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "45161bf7ec500c65",
+        "type": "function",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "func": "msg.payload = msg.payload.id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "1896692b9761926f"
+            ]
+        ]
+    },
+    {
+        "id": "506faf25e7221b73",
+        "type": "function",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "func": "msg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 200,
+        "wires": [
+            [
+                "792f7d19b50e9197"
+            ]
+        ]
+    },
+    {
+        "id": "864fd18c393be93e",
+        "type": "debug",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0b94aa6d0a7d0467",
+        "type": "ui_chart",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "group": "675be2c84613b4d6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9f971573ff0fac1",
+        "type": "function",
+        "z": "1a14bd5e39995fad",
+        "name": "",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 240,
+        "wires": [
+            [
+                "0b94aa6d0a7d0467"
+            ]
+        ]
+    },
+    {
+        "id": "a26d972205b5e500",
+        "type": "mqtt-broker",
+        "name": "hive mq",
+        "broker": "52.29.114.186",
+        "port": "1883",
+        "clientid": "Abril-SIC",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "675be2c84613b4d6",
+        "type": "ui_group",
+        "name": "Último dato",
+        "tab": "2bcbf4a5f15b3a12",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2bcbf4a5f15b3a12",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
